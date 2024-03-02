@@ -27,7 +27,7 @@ class AwsCleanRoomCdkStack(Stack):
         # table_name = "delphinodelphit"
         glue_database_name = "microetldb"
         glue_table_name = "output_parquet_files"
-        collaboration_identifier = "01d639e2-7483-4cdd-8cc9-7a588c745b5d"
+        collaboration_identifier = "collaboration-uuid"
          # Create IAM Role for the service to assume
         configured_table_role = iam.Role(
             self,
@@ -68,7 +68,7 @@ class AwsCleanRoomCdkStack(Stack):
             creator_member_abilities=["CAN_QUERY"],
             members=[
                 {
-                    "accountId": "798552153158",  
+                    "accountId": "AccountID",  
                     "displayName": "Delphino",
                     "memberAbilities": [ "CAN_RECEIVE_RESULTS"]
                 }
@@ -77,7 +77,7 @@ class AwsCleanRoomCdkStack(Stack):
            
         )
 
-        collaboration.set_query_compute_cost_payer = "576997243977"
+        collaboration.set_query_compute_cost_payer = "AccountID"
         
         cfn_membership = cleanrooms.CfnMembership(self, "CfnMembership",
             collaboration_identifier=collaboration_identifier,
@@ -154,8 +154,8 @@ class AwsCleanRoomCdkStack(Stack):
         )
 
         cfn_configured_table_association = cleanrooms.CfnConfiguredTableAssociation(self, "DelphitdelphinoTableAssociation",
-            configured_table_identifier="59fd005a-8069-4b40-a170-304c536a6527",
-            membership_identifier="e7c24dc4-e19e-46d0-9dcd-8bc27d275a1a",
+            configured_table_identifier="collaboration-uuid",
+            membership_identifier="membership-uuid",
             name=glue_table_name,
             role_arn=configured_table_role.role_arn,
           
